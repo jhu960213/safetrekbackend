@@ -9,7 +9,7 @@ exposure = pd.read_csv(path)  # with the default column names
 
 # flask object
 app = flask.Flask(__name__)
-CORS(app)
+# CORS(app)
 
 
 #
