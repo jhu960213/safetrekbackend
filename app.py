@@ -2,12 +2,14 @@
 import flask
 from flask import request
 import pandas as pd
+from flask_cors import CORS
 
 path = "./covid.csv"
 exposure = pd.read_csv(path)  # with the default column names
 
 # flask object
 app = flask.Flask(__name__)
+CORS(app)
 
 
 #
@@ -27,7 +29,7 @@ def query_by_long_lat():
         for i in range(0, exposure.shape[0]):
             cur_lat = exposure.iloc[i, 2]
             cur_long = exposure.iloc[i, 3]
-            tempDict[(abs(cur_lat-lat)**2 + abs(cur_long-long)**2)**(1/2)] = i
+            tempDict[(abs(cur_lat - lat) ** 2 + abs(cur_long - long) ** 2) ** (1 / 2)] = i
 
         # get a list of the sorted keys
         keys = list(tempDict.keys())
@@ -52,7 +54,7 @@ def query_by_long_lat():
         risk2 = loc2[-1] + loc2[5]
 
         # weighted average risk
-        weight_avg_risk = (risk0*min0 + risk1*min1 + risk2*min2)/num_nearby_locations
+        weight_avg_risk = (risk0 * min0 + risk1 * min1 + risk2 * min2) / num_nearby_locations
 
         # return a json key value pair
         return {'weighted_avg_risk': weight_avg_risk}
@@ -60,7 +62,6 @@ def query_by_long_lat():
     except Exception as e:
         print(e)
         return f'Invalid processing happened on the backend!'
-
 
 # if __name__ == '__main__':
 #     app.run()
