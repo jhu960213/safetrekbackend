@@ -48,10 +48,10 @@ def initialize_db():
 #
 
 # flask api routing methods
-@my_server.route('/queryAll', methods=['GET'])
+@my_server.route('/', methods=['GET'])
 def home():
-    cursor.execute("SELECT * FROM %s;" % table_name)
-    return cursor.fetchall()
+    # cursor.execute("SELECT * FROM %s;" % table_name)
+    return "Hello, world"
 
 
 if __name__ == '__main__':
