@@ -3,9 +3,17 @@ import flask
 from flask import request
 import pandas as pd
 from flask_cors import cross_origin, CORS
+import psycopg2
+from settings import *
 
 path = "./covid.csv"
-exposure = pd.read_csv(path)  # with the default column names
+exposure = pd.read_csv(path)
+
+# connecting to postgrl database
+db = psycopg2.connect(dbname=DB_NAME, user=DB_USER,
+                      password=DB_PASSWORD, host=DB_HOST)
+cursor = db.cursor()
+
 
 # flask object
 app = flask.Flask(__name__)

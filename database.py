@@ -3,7 +3,6 @@
 # import json
 # from sqlalchemy import create_engine
 # from settings import *
-# import psycopg2
 #
 # # connecting to postgrl database
 # db = psycopg2.connect(dbname=DB_NAME, user=DB_USER,
@@ -60,7 +59,5 @@
 #
 #
 # if __name__ == '__main__':
-#     import sys
-#     print(sys.path)
 #     # delete_table()
 #     # initialize_db()
