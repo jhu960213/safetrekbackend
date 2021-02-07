@@ -20,8 +20,8 @@ def query_by_long_lat():
     tempDict = {}
     num_nearby_locations = 3
     try:
-        lat = int(request.args['lat'])
-        long = int(request.args['long'])
+        lat = float(request.args['lat'])
+        long = float(request.args['long'])
 
         # storing the sum of abs diff of lat and long and its index value
         for i in range(0, exposure.shape[0]):
