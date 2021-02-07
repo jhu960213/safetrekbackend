@@ -64,7 +64,7 @@ def find_risk():
         risk2 = loc2[-1] + loc2[5]
 
         # weighted average risk
-        weight_avg_risk = (risk0 * min0 + risk1 * min1 + risk2 * min2) / num_nearby_locations
+        weight_avg_risk = (risk0 * (1/min0) + risk1 * (1/min1) + risk2 * (1/min2)) / num_nearby_locations
 
         # return a json key value pair
         response = flask.jsonify({'weighted_avg_risk': weight_avg_risk})
