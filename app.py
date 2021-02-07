@@ -37,3 +37,7 @@ def query_by_long_lat():
     except Exception as e:
         print(e)
         return f'Invalid processing!'
+
+
+if __name__ == '__main__':
+    app.run()
