@@ -12,9 +12,7 @@ cursor = db.cursor()
 
 # setting up env variables, paths, and database URI
 table_name = "exposure"
-path = "./covid.csv"
 data_base_URI = "postgres://lprwvaeypufzlm:e3fe0d7b99ad1b140f38f9c6165135551d1ce1da70245ddc78389e901c6cd77e@ec2-54-211-77-238.compute-1.amazonaws.com:5432/d31aa5atdorsnu"
-myData = pd.read_csv(path)  # with the default column names
 
 
 # delete desired table in postgres

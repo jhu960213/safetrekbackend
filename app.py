@@ -1,8 +1,10 @@
 # imports
 import flask
-from settings import *
-from database import *
+from flask import request
+import pandas as pd
 
+path = "./covid.csv"
+myData = pd.read_csv(path)  # with the default column names
 
 # flask app
 app = flask.Flask(__name__)
@@ -14,7 +16,9 @@ app = flask.Flask(__name__)
 
 # flask api routing methods
 @app.route('/', methods=['GET'])
-def home():
-    cursor.execute("SELECT * FROM %s;" % table_name)
-    return cursor.fetchall()
-
+def query_location():
+    location = str(request.args['name'])
+    try:
+        return myData[location]
+    except KeyError as e:
+        return f'Invalid location!'
