@@ -9,8 +9,9 @@ exposure = pd.read_csv(path)  # with the default column names
 
 # flask object
 app = flask.Flask(__name__)
-cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resources={r"/": {"origins": "https://safetrekbackend.herokuapp.com/"}})
+
 
 #
 # backend API methods to interact with our datasbase
@@ -18,7 +19,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 # flask api routing methods
 @app.route('/', methods=['GET'])
-@cross_origin()
+@cross_origin(origin="https://safetrekbackend.herokuapp.com/", headers=['Content- Type', 'Authorization'])
 def find_risk():
     tempDict = {}
     num_nearby_locations = 3
