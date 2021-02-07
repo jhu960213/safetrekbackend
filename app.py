@@ -19,8 +19,8 @@ app = flask.Flask(__name__)
 def query_by_long_lat():
     tempDict = {}
     try:
-        lat = float(request.args.get('lat'))
-        long = float(request.args.get('long'))
+        lat = request.args.get('lat')
+        long = request.args.get('long')
 
         # storing the sum of abs diff of lat and long and its index value
         for i in range(0, exposure.shape[0]):
