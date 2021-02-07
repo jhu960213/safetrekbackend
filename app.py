@@ -1,9 +1,12 @@
 # imports
 import flask
-import pandas as pd
+from settings import *
+import psycopg2
 
-
-
+# connecting to postgrl database
+db = psycopg2.connect(dbname=DB_NAME, user=DB_USER,
+                      password=DB_PASSWORD, host=DB_HOST)
+cursor = db.cursor()
 
 # flask app
 app = flask.Flask(__name__)
@@ -19,7 +22,3 @@ def home():
     # cursor.execute("SELECT * FROM %s;" % table_name)
     return "Hello, world"
 
-
-# if __name__ == '__main__':
-#     delete_table()
-#     initialize_db()
