@@ -9,13 +9,14 @@ exposure = pd.read_csv(path)  # with the default column names
 # flask object
 app = flask.Flask(__name__)
 
+
 #
 # backend API methods to interact with our datasbase
 #
 
 # flask api routing methods
 @app.route('/risk/eval/', methods=['GET'])
-def query_by_long_lat():
+def calculate_risk_query_by_long_lat():
     tempDict = {}
     num_nearby_locations = 3
     try:
@@ -54,7 +55,9 @@ def query_by_long_lat():
         weight_avg_risk = (risk0 * min0 + risk1 * min1 + risk2 * min2) / num_nearby_locations
 
         # return a json key value pair
-        return {'weighted_avg_risk': weight_avg_risk}
+        response = flask.jsonify({'weighted_avg_risk': weight_avg_risk})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
     except Exception as e:
         print(e)
