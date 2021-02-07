@@ -3,6 +3,7 @@ import flask
 from flask import request
 import pandas as pd
 from flask_cors import cross_origin, CORS
+
 # import psycopg2
 # from settings import *
 
@@ -64,10 +65,10 @@ def find_risk():
         risk2 = loc2[-1] + loc2[5]
 
         # weighted average risk
-        weight_avg_risk = (risk0 * (1/min0) + risk1 * (1/min1) + risk2 * (1/min2)) / num_nearby_locations
+        weight_avg_risk = (risk0 + risk1 + risk2) / num_nearby_locations
 
         # return a json key value pair
-        response = flask.jsonify({'weighted_avg_risk': weight_avg_risk})
+        response = flask.jsonify({'weighted_avg_exposure': weight_avg_risk})
         return response
 
     except Exception as e:
