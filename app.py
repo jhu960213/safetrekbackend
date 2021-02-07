@@ -9,17 +9,19 @@ exposure = pd.read_csv(path)  # with the default column names
 
 # flask object
 app = flask.Flask(__name__)
+
 app.config['CORS_HEADERS'] = 'Content-Type'
-cors = CORS(app, resources={r"/risk/eval/": {"origins": "https://safetrekbackend.herokuapp.com/"}})
+cors = CORS(app, resources={r"/": {"origins": "https://safetrekbackend.herokuapp.com/"}})
+
 
 #
 # backend API methods to interact with our datasbase
 #
 
 # flask api routing methods
-@app.route('/risk/eval/', methods=['GET'])
-@cross_origin(origin="https://safetrekbackend.herokuapp.com/",headers=['Content- Type','Authorization'])
-def calculate_risk_query_by_long_lat():
+@app.route('/', methods=['GET'])
+@cross_origin(origin="https://safetrekbackend.herokuapp.com/", headers=['Content- Type', 'Authorization'])
+def find_risk():
     tempDict = {}
     num_nearby_locations = 3
     try:
@@ -45,9 +47,9 @@ def calculate_risk_query_by_long_lat():
         loc0 = exposure.iloc[tempDict[min0], :]
         loc1 = exposure.iloc[tempDict[min1], :]
         loc2 = exposure.iloc[tempDict[min2], :]
-        print(loc0)
-        print(loc1)
-        print(loc2)
+        # print(loc0)
+        # print(loc1)
+        # print(loc2)
 
         # define risk values for each location
         risk0 = loc0[-1] + loc0[5]
@@ -65,5 +67,6 @@ def calculate_risk_query_by_long_lat():
         print(e)
         return f'Invalid processing happened on the backend!'
 
-# if __name__ == '__main__':
-#     app.run()
+
+if __name__ == '__main__':
+    app.run()
