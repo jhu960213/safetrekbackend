@@ -60,5 +60,7 @@
 #
 #
 # if __name__ == '__main__':
-#     delete_table()
-#     initialize_db()
+#     import sys
+#     print(sys.path)
+#     # delete_table()
+#     # initialize_db()
