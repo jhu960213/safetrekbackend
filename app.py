@@ -32,6 +32,9 @@ cors = CORS(app, resources={r"/": {"origins": "https://safetrekbackend.herokuapp
 def find_risk():
     tempDict = {}
     num_nearby_locations = 3
+    w0 = 0.8
+    w1 = 0.5
+    w2 = 0.2
     try:
         lat = float(request.args['lat'])
         long = float(request.args['long'])
@@ -65,7 +68,7 @@ def find_risk():
         risk2 = loc2[-1] + loc2[5]
 
         # weighted average risk
-        weight_avg_risk = (risk0 + risk1 + risk2) / num_nearby_locations
+        weight_avg_risk = (w0*risk0 + w1*risk1 + w2*risk2) / num_nearby_locations
 
         # return a json key value pair
         response = flask.jsonify({'weighted_avg_exposure': weight_avg_risk})
