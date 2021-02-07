@@ -2,8 +2,13 @@ from pymongo import *
 import pandas as pd
 import json
 from sqlalchemy import create_engine
-from app import *
 from settings import *
+import psycopg2
+
+# connecting to postgrl database
+db = psycopg2.connect(dbname=DB_NAME, user=DB_USER,
+                      password=DB_PASSWORD, host=DB_HOST)
+cursor = db.cursor()
 
 # setting up env variables, paths, and database URI
 table_name = "exposure"
