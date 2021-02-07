@@ -54,6 +54,6 @@ def home():
     return "Hello, world"
 
 
-if __name__ == '__main__':
-    delete_table()
-    initialize_db()
+# if __name__ == '__main__':
+#     delete_table()
+#     initialize_db()
