@@ -22,10 +22,15 @@ cursor = db.cursor()
 
 # delete desired table in postgres
 def delete_table():
-    cursor.execute("DROP TABLE %s;" % table_name)
-    db.commit()
-    cursor.close()
-    db.close()
+    try:
+        cursor.execute("DROP TABLE %s;" % table_name)
+        db.commit()
+        cursor.close()
+        db.close()
+    except Exception as e:
+        print(e + "Skipping delete operation!")
+
+
 
 
 # initialize database with records
@@ -43,10 +48,12 @@ def initialize_db():
 #
 
 # flask api routing methods
-@my_server.route('/', methods=['GET'])
+@my_server.route('/queryAll', methods=['GET'])
 def home():
-    return "Hello, safetrek home!"
+    cursor.execute("SELECT * FROM %s;" % table_name)
+    return cursor.fetchall()
 
 
 if __name__ == '__main__':
+    delete_table()
     initialize_db()
