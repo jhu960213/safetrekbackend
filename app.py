@@ -9,9 +9,8 @@ exposure = pd.read_csv(path)  # with the default column names
 
 # flask object
 app = flask.Flask(__name__)
-
-# app.config['CORS_HEADERS'] = 'Content-Type'
-# cors = CORS(app, resources={r"/": {"origins": "https://safetrekbackend.herokuapp.com/"}})
+app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resources={r"/": {"origins": "https://safetrekbackend.herokuapp.com/"}})
 
 
 #
