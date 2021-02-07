@@ -18,7 +18,7 @@ cors = CORS(app, resources={r"/risk/eval/": {"origins": "https://safetrekbackend
 
 # flask api routing methods
 @app.route('/risk/eval/', methods=['GET'])
-@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+@cross_origin(origin="https://safetrekbackend.herokuapp.com/",headers=['Content- Type','Authorization'])
 def calculate_risk_query_by_long_lat():
     tempDict = {}
     num_nearby_locations = 3
