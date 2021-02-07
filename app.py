@@ -2,22 +2,23 @@
 import flask
 from flask import request
 import pandas as pd
-# from flask_cors import cross_origin, CORS
+from flask_cors import cross_origin, CORS
 
 path = "./covid.csv"
 exposure = pd.read_csv(path)  # with the default column names
 
 # flask object
 app = flask.Flask(__name__)
-# CORS(app)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 #
 # backend API methods to interact with our datasbase
 #
 
 # flask api routing methods
-# @cross_origin()
 @app.route('/', methods=['GET'])
+@cross_origin()
 def find_risk():
     tempDict = {}
     num_nearby_locations = 3
