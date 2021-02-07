@@ -35,4 +35,5 @@ def query_by_long_lat():
         extracted_row = exposure.iloc[tempDict[minKey], :]
         return flask.jsonify(extracted_row)
     except Exception as e:
+        print(e)
         return f'Invalid processing!'
