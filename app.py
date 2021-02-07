@@ -2,13 +2,15 @@
 import flask
 from flask import request
 import pandas as pd
+from flask_cors import CORS, cross_origin
 
 path = "./covid.csv"
 exposure = pd.read_csv(path)  # with the default column names
 
 # flask object
 app = flask.Flask(__name__)
-
+app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resources={r"/risk/eval/": {"origins": "https://safetrekbackend.herokuapp.com/"}})
 
 #
 # backend API methods to interact with our datasbase
@@ -16,6 +18,7 @@ app = flask.Flask(__name__)
 
 # flask api routing methods
 @app.route('/risk/eval/', methods=['GET'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def calculate_risk_query_by_long_lat():
     tempDict = {}
     num_nearby_locations = 3
@@ -56,7 +59,6 @@ def calculate_risk_query_by_long_lat():
 
         # return a json key value pair
         response = flask.jsonify({'weighted_avg_risk': weight_avg_risk})
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
     except Exception as e:
