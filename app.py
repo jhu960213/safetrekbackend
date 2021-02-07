@@ -16,9 +16,8 @@ app = flask.Flask(__name__)
 
 # flask api routing methods
 @app.route('/', methods=['GET'])
-def query_location():
-    location = str(request.args['name'])
+def query_all():
     try:
-        return myData[location]
+        return myData.values
     except KeyError as e:
         return f'Invalid location!'
